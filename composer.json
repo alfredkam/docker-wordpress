@@ -5,7 +5,6 @@
     },
     "extra": {
         "heroku": {
-            "framework": "slim",
             "document-root": "web",
             "index-document": "index.php"
         }
