@@ -40,7 +40,6 @@ RUN chown -R www-data:www-data /app
 
 # Use our default config
 ADD wp-config.php /app/wp-config.php
-ADD test.php /var/www/html/test.php
 
 # Initialize custom config from volume
 ADD volume-init.sh /volume-init.sh
