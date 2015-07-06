@@ -15,8 +15,6 @@ RUN apt-get update
 RUN apt-get -y upgrade
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
 
-        php5-fpm \
-        nginx-light \
         mysql-client \
         apache2 \
         libapache2-mod-php5 \
@@ -29,8 +27,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
 RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/apache2/php.ini
 RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/cli/php.ini
 
-# RUN a2enmod rewrite
-# RUN a2enmod headers
+RUN a2enmod rewrite
+RUN a2enmod headers
 
 RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
 
