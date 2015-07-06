@@ -16,7 +16,7 @@ RUN apt-get -y upgrade
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
 
         mysql-client \
-        apache2 \
+        nginx-light \
         libapache2-mod-php5 \
         php5-mysql  \
         php5-ldap \
@@ -24,11 +24,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
         php5-curl \
         php-pear && rm -rf /var/lib/apt/lists/*
 
-RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/apache2/php.ini
+# RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/apache2/php.ini
 RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/cli/php.ini
 
-RUN a2enmod rewrite
-RUN a2enmod headers
+# RUN a2enmod rewrite
+# RUN a2enmod headers
 
 RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
 
@@ -46,10 +46,12 @@ ADD volume-init.sh /volume-init.sh
 RUN chmod 755 /volume-init.sh
 
 # Configure and start apache
-ADD vhost.conf /etc/apache2/sites-enabled/000-default.conf
+# ADD vhost.conf /etc/apache2/sites-enabled/000-default.conf
+
+RUN chmod 755 /nginx-init.sh
+
 ADD run.sh /run.sh
 
 EXPOSE 80
 WORKDIR /app
 CMD ["/run.sh"]
-
