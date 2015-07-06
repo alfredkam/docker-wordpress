@@ -16,6 +16,7 @@ RUN apt-get -y upgrade
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
 
         mysql-client \
+        apache2 \
         nginx-light \
         libapache2-mod-php5 \
         php5-mysql  \
