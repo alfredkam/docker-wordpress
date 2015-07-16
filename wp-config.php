@@ -1,5 +1,5 @@
 <?php
-$host = getenv('DB_HOST') . ":" . getenv('DB_PORT'); 
+$host = getenv('DB_HOST') . ":" . getenv('DB_PORT');
 define('DB_HOST', $host);
 define('DB_USER', getenv('DB_USER'));
 define('DB_PASSWORD', getenv('DB_PASSWORD'));
@@ -11,7 +11,7 @@ define( 'DB_COLLATE', ''     );
 define('FS_METHOD', 'direct');
 
 #define('WP_HOME','http://usblog.triumph.com');
-#define('WP_SITEURL','http://usblog.triumph.com');
+define('WP_SITEURL','http://andrewboos.com');
 
 
 $table_prefix  = 'wp_';
