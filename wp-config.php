@@ -10,8 +10,8 @@ define( 'DB_COLLATE', ''     );
 
 define('FS_METHOD', 'direct');
 
-define('WP_HOME','http://andrewboos.com');
-define('WP_SITEURL','http://andrewboos.com');
+#define('WP_HOME','http://andrewboos.com');
+#define('WP_SITEURL','http://andrewboos.com');
 
 
 $table_prefix  = 'wp_';
