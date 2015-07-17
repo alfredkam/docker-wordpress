@@ -24,6 +24,26 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
         php5-curl \
         php-pear && rm -rf /var/lib/apt/lists/*
 
+
+# Install New Relic
+RUN apt-get update
+RUN apt-get -yqq install wget
+RUN apt-get -yqq install python-setuptools
+RUN easy_install pip
+RUN mkdir -p /opt/newrelic
+WORKDIR /opt/newrelic
+RUN wget -r -nd --no-parent -Alinux.tar.gz \
+    http://download.newrelic.com/php_agent/release/ >/dev/null 2>&1 \
+    && tar -xzf newrelic-php*.tar.gz --strip=1
+ENV NR_INSTALL_SILENT true
+RUN bash newrelic-install install
+WORKDIR /
+RUN pip install newrelic-plugin-agent
+RUN mkdir -p /var/log/newrelic
+RUN mkdir -p /var/run/newrelic
+
+# Setup apache
+
 RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/apache2/php.ini
 RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/cli/php.ini
 
