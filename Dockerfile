@@ -41,8 +41,10 @@ RUN (wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y newrelic-php5 && \
   apt-get clean) && \
   newrelic-install install && \
-  echo '\nnewrelic.license="${NEWRELIC_LICENSE}"' >> /etc/php5/mods-available/newrelic.ini && \
-  echo '\nnewrelic.appname="${NEWRELIC_APPNAME}"' >> /etc/php5/mods-available/newrelic.ini
+  echo '\nnewrelic.license="$NEWRELIC_LICENSE"' >> /etc/php5/mods-available/newrelic.ini && \
+  echo '\nnewrelic.appname="$NEWRELIC_APPNAME"' >> /etc/php5/mods-available/newrelic.ini && \
+  cp /etc/php5/mods-available/newrelic.ini /etc/php5/cli/conf.d/newrelic.ini && \
+  cp /etc/php5/mods-available/newrelic.ini /etc/php5/apache2/conf.d/newrelic.ini
 
 # Create and link content
 
