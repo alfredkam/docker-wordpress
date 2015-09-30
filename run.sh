@@ -8,3 +8,9 @@ trap "kill -TERM -$pgrp; exit" EXIT TERM KILL SIGKILL SIGTERM SIGQUIT
 
 source /etc/apache2/envvars
 exec apache2 -D FOREGROUND
+
+# Add NewRelic keys
+echo "\nnewrelic.license=\"$NEWRELIC_LICENSE\"" >> /etc/php5/mods-available/newrelic.ini && \
+echo "\nnewrelic.appname=\"$NEWRELIC_APPNAME\"" >> /etc/php5/mods-available/newrelic.ini && \
+cp /etc/php5/mods-available/newrelic.ini /etc/php5/cli/conf.d/newrelic.ini && \
+cp /etc/php5/mods-available/newrelic.ini /etc/php5/apache2/conf.d/newrelic.ini

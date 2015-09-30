@@ -31,7 +31,7 @@ RUN sed -i "s/variables_order.*/variables_order = \"EGPCS\"/g" /etc/php5/cli/php
 RUN a2enmod rewrite
 RUN a2enmod headers
 
-# install NewRelic and add info to new relic
+# Install NewRelic
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates wget
 
@@ -40,11 +40,7 @@ RUN (wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y newrelic-php5 && \
   apt-get clean) && \
-  newrelic-install install && \
-  echo "\nnewrelic.license=\"$NEWRELIC_LICENSE\"" >> /etc/php5/mods-available/newrelic.ini && \
-  echo "\nnewrelic.appname=\"$NEWRELIC_APPNAME\"" >> /etc/php5/mods-available/newrelic.ini && \
-  cp /etc/php5/mods-available/newrelic.ini /etc/php5/cli/conf.d/newrelic.ini && \
-  cp /etc/php5/mods-available/newrelic.ini /etc/php5/apache2/conf.d/newrelic.ini
+  newrelic-install install
 
 # Create and link content
 RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
