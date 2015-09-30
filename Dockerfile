@@ -47,7 +47,6 @@ RUN (wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
   cp /etc/php5/mods-available/newrelic.ini /etc/php5/apache2/conf.d/newrelic.ini
 
 # Create and link content
-
 RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
 
 # Install vanilla wordpress
